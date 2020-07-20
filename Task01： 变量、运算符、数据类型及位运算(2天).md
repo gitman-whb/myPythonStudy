@@ -11,5 +11,5 @@ print("Hello World")
 '''
 ```
 2.python中有哪些运算符，这些运算符的优先级是怎么样的？<br>
-3.python中'is'，'is not'与'=='，'!='的区别是什么？<br>
+3.python中`is`，`is not`与`==`，`!=`的区别是什么？<br>
 4.python中包含哪些数据类型？这些数据类型之间如何切换？<br>
