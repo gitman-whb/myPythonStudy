@@ -500,3 +500,246 @@ a, b = 1, 2
 拆包过程是指利用一句赋值语句按顺序将元组中的各元素赋值给=左边的各个变量，属于拆包。
 
 在可迭代对象拆包时，使用`_`(单个元素)，`*_`(连续多个元素)进行占位。
+# 3 字符串
+
+* Python 使用成对的 单引号 或 双引号。
+* Python 的常用转义字符
+
+| 转义字符 | 描述            |
+| -------- | --------------- |
+| `\\`     | 反斜杠符号      |
+| `\'`     | 单引号          |
+| `\"`     | 双引号          |
+| `\n`     | 换行            |
+| `\t`     | 横向制表符(TAB) |
+| `\r`     | 回车            |
+
+***
+
+## **字符串常用内置方法：**
+
+* `capitalize()` 将字符串的第一个字符转换为大写
+
+- `lower()` 转换字符串中所有大写字符为小写。
+- `upper()` 转换字符串中的小写字母为大写。
+- `swapcase()` 将字符串中大写转换为小写，小写转换为大写。
+
+```python
+str2 = 'xiaoxie'
+print(str2.capitalize())  # Xiaoxie
+str2 = "DAXIExiaoxie"
+print(str2.lower())  # daxiexiaoxie
+print(str2.upper())  # DAXIEXIAOXIE
+print(str2.swapcase())  # daxieXIAOXIE
+```
+
+* `count(str, beg= 0,end=len(string))` 返回`str`在 string 里面出现的次数，beg和end可指定范围。
+
+```python
+str2 = "DAXIExiaoxie"
+print(str2.count('xi'))  # 2
+```
+
+* `endswith(suffix, beg=0, end=len(string))` 检查字符串是否以指定子字符串 `suffix` 结束，如果是，返回 True，否则返回 False。beg和end可指定范围。
+
+* `startswith(substr, beg=0,end=len(string))` 检查字符串是否以指定子字符串 `substr` 开头，如果是，返回 True，否则返回 False。beg和end可指定范围。
+
+```python
+str2 = "DAXIExiaoxie"
+print(str2.endswith('ie'))  # True
+print(str2.endswith('xi'))  # False
+print(str2.startswith('Da'))  # False
+print(str2.startswith('DA'))  # True
+```
+
+`isnumeric()` 如果字符串中只包含数字字符，则返回 True，否则返回 False。
+
+- `lstrip([chars])` 截掉字符串左边的空格或指定字符。
+- `rstrip([chars])` 删除字符串末尾的空格或指定字符。
+- `strip([chars])` 在字符串上执行`lstrip()`和`rstrip()`。
+
+```python
+str5 = ' I Love LsgoGroup '
+print(str5.lstrip())  # 'I Love LsgoGroup '
+print(str5.lstrip().strip('I'))  # ' Love LsgoGroup '
+print(str5.rstrip())  # ' I Love LsgoGroup'
+print(str5.strip())  # 'I Love LsgoGroup'
+print(str5.strip().strip('p'))  # 'I Love LsgoGrou'  
+#strip('p')前提是你得知道字符串左边和末尾字符是什么，所以主要用处还是strip（）去首尾空格
+```
+
+- `replace(old, new [, max])` 把 将字符串中的`old`替换成`new`，如果`max`指定，则替换不超过`max`次。
+
+```python
+str5 = ' I Love LsgoGroup '
+print(str5.strip().replace('I', 'We'))  # We Love LsgoGroup
+```
+
+- `split(str="", num)` 不带参数默认是以空格为分隔符切片字符串，如果`num`参数有设置，则仅分隔`num`个子字符串，返回切片后的子字符串拼接的列表。
+
+```python
+str5 = ' I Love LsgoGroup '
+print(str5.strip().split())  # ['I', 'Love', 'LsgoGroup']
+print(str5.strip().split('o'))  # ['I L', 've Lsg', 'Gr', 'up']
+print(str5.strip().split('o',1))#只分割一次 ['I L', 've LsgoGroup']
+s1,s2,s3=str5.strip().split('o',2)# 分割两次，并把分割后的三个部分保存到三个变量
+print(s1,s2,s3,sep='\n')
+'''
+I L
+ve Lsg
+Group
+'''
+
+string = "hello boy<[www.baidu.com]>byebye"
+print(string.split('[')[1].split(']')[0])  # www.baidu.com
+```
+
+- `splitlines([keepends])` 按照行('\r', '\r\n', \n')分隔，返回一个包含各行作为元素的列表，默认参数`keepends`为 False，不包含换行符，如果为 True，则保留换行符。
+
+```
+str6 = 'I \n Love \n LsgoGroup'
+print(str6.splitlines())  # ['I ', ' Love ', ' LsgoGroup']
+print(str6.splitlines(True))  # ['I \n', ' Love \n', ' LsgoGroup']
+```
+
+## 字符串格式化
+
+- `format` 格式化函数
+
+```python
+str8 = "{0} Love {1}".format('I', 'Lsgogroup')  # 位置参数
+print(str8)  # I Love Lsgogroup
+
+str8 = "{a} Love {b}".format(a='I', b='Lsgogroup')  # 关键字参数
+print(str8)  # I Love Lsgogroup
+
+str8 = "{0} Love {b}".format('I', b='Lsgogroup')  # 位置参数要在关键字参数之前
+print(str8)  # I Love Lsgogroup
+
+str8 = '{0:.2f}{1}'.format(27.658, 'GB')  # 保留小数点后两位
+print(str8)  # 27.66GB
+```
+
+- Python 字符串格式化符号
+
+| 符 号 | 描述                                              |
+| ----- | ------------------------------------------------- |
+| %c    | 格式化字符及其ASCII码                             |
+| %s    | 格式化字符串，用str()方法处理对象                 |
+| %r    | 格式化字符串，用rper()方法处理对象，保留单/双引号 |
+| %d    | 格式化整数                                        |
+| %o    | 格式化无符号八进制数                              |
+| %x    | 格式化无符号十六进制数                            |
+| %X    | 格式化无符号十六进制数（大写）                    |
+| %f    | 格式化浮点数字，可指定小数点后的精度              |
+| %e    | 用科学计数法格式化浮点数                          |
+| %E    | 作用同%e，用科学计数法格式化浮点数                |
+| %g    | 根据值的大小决定使用%f或%e                        |
+| %G    | 作用同%g，根据值的大小决定使用%f或%E              |
+
+```python
+print('%c' % 97)  # a
+print("我叫 %s 今年 %d 岁!" % ('小明', 10))  # 我叫 小明 今年 10 岁!
+print('%f' % 27.658)  # 27.658000
+print('%e' % 27.658)  # 2.765800e+01
+print('%E' % 27.658)  # 2.765800E+01
+print('%g' % 27.658)  # 27.658
+text = "I am %d years old" % 22
+print("I said: %s." % text)  # I said: I am 22 years old.
+print("I said: %r." % text)  # I said: 'I am 22 years old'.
+```
+
+- 格式化操作符辅助指令
+
+| 符号  | 功能                                                         |
+| ----- | ------------------------------------------------------------ |
+| `m.n` | m 是显示的最小总宽度(不够的话在数字前面补空格),n 是小数点后的位数 |
+| `-`   | 用作左对齐                                                   |
+| `+`   | 在正数前面显示加号( + )                                      |
+| `#`   | 在八进制数前面显示零('0')，在十六进制前面显示'0x'或者'0X'(取决于用的是'x'还是'X') |
+| `0`   | 显示的数字前面填充'0'而不是默认的空格                        |
+
+```python
+print('%5.1f' % 27.658)  # ' 27.7'
+print('%.2e' % 27.658)  # 2.77e+01
+print('%10d' % 10)  # '        10'
+print('%-10d' % 10)  # '10        '
+print('%+d' % 10)  # +10
+print('%#o' % 10)  # 0o12
+print('%#x' % 108)  # 0x6c
+print('%010d' % 10)  # 0000000010
+```
+
+## 练习题
+
+1、字符串函数回顾
+
+- 怎么批量替换字符串中的元素？
+- 怎么把字符串按照空格进⾏拆分？
+- 怎么去除字符串⾸位的空格？
+
+***
+
+`replace(old, new [, max])` 把 将字符串中的`old`替换成`new`，如果`max`指定，则替换不超过`max`次。
+
+`split(str="", num)` 不带参数默认是以空格为分隔符切片字符串，如果`num`参数有设置，则仅分隔`num`个子字符串，返回切片后的子字符串拼接的列表。
+
+`strip([chars])`截掉字符串首尾空格
+
+2、实现isdigit函数
+
+题目要求
+
+实现函数isdigit， 判断字符串里是否只包含数字0~9
+
+```python
+def isdigit(string):
+    """
+    判断字符串只包含数字
+    :param string:
+    :return:
+    """
+   
+    flag = string.isnumeric()
+    return flag
+    pass
+```
+
+3、leetcode 5题 最长回文子串
+
+给定一个字符串 `s`，找到 `s` 中最长的回文子串。你可以假设 `s` 的最大长度为 1000。
+
+示例:
+
+输入: "babad"
+
+输出: "bab"
+
+输入: "cbbd"
+
+输出: "bb"
+```python
+class Solution:
+   def longestPalindrome(self, s: str) -> str:
+          
+    # your code here
+    class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        length = len(s)
+#dp用来做动态规划存储的
+        dp = [[0] * length for _ in range(length)]
+        left, right = 0, 0 #长度为1时
+        for i in range(1, length):
+#因为最大长度为length，所以j+i<=length，第二遍不需要遍历到length
+             for j in range(length-i):
+#如j+1 >= j+i-1是用来初始化0或者1的回文的，
+#条件1：s[j] == s[j+i]  
+#条件2; s[i] = s[j]，dp[j+1][j+i-1]
+#s[i+1:j-1] 是一个回文串
+                if s[j] == s[j+i] and (j+1 >= j+i-1 or dp[j+1][j+i-1]):
+# 因为同时满足条件1和条件2，所以更长的字符也是回文
+                    dp[j][j+i] = 1 
+#记录左区间和右区间，用来返回的时候截取回文
+                    left, right = j, j+i
+        return s[left: right+1]
+```
