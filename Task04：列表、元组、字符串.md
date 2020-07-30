@@ -699,10 +699,13 @@ def isdigit(string):
     :param string:
     :return:
     """
-   
-    flag = string.isnumeric()
-    return flag
-    pass
+#使用ord函数获得字符的ASCII编码对应的10进制数值，接着判断是否在48到57之间   
+if not string: 
+    return False
+for item in string: 
+    if not (48 <= ord(item) <= 57):
+        return False 
+    return True 
 ```
 
 3、leetcode 5题 最长回文子串
